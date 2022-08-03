@@ -11,14 +11,15 @@ datasource db {
 }
 
 model user {
-  id        String   @id @default(cuid())
-  userName  String   @unique
-  email     String   @unique
+  id        String    @id @default(cuid())
+  userName  String    @unique
+  email     String    @unique
   password  String
-  mobile    String   @unique
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  mobile    String    @unique
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  profile   profile?
 }
 
 model profile {
@@ -31,11 +32,13 @@ model profile {
   jobapplic     jobApplication[]
   type          recruiter?       @relation(fields: [recruiterId], references: [id])
   recruiterId   String?          @unique
-  
+  user          user?            @relation(fields: [userId], references: [id])
+  userId        String?
   isActive      Boolean          @default(true)
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @default(now())
   job           job[]
+  
 }
 
 model recruiter {
@@ -77,4 +80,3 @@ model jobApplication {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
 }
-
