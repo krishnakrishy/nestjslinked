@@ -4,12 +4,12 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { JobModule } from './job/job.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    PrismaModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: process.env.ENABLE_PLAYGROUND === 'true' ? true : false,
@@ -17,6 +17,8 @@ import { UserModule } from './user/user.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     UserModule,
+    PrismaModule,
+    JobModule,
   ],
   controllers: [AppController],
   providers: [AppService],
