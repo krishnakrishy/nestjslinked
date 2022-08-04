@@ -1,4 +1,4 @@
-import {  ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
@@ -14,9 +14,10 @@ import { UserModule } from './user/user.module';
       driver: ApolloDriver,
       playground: process.env.ENABLE_PLAYGROUND === 'true' ? true : false,
       introspection: process.env.ENABLE_INTROSPECTION === 'true' ? true : false,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql')}),
-    UserModule],
-
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
+    UserModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
