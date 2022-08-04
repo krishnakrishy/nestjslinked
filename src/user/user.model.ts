@@ -11,13 +11,10 @@ export class User {
   @Field()
   email: string;
 
-  @Field()
-  password: string;
-
   @Field(() => Int)
   mobile: number;
 
- // @Field(() => Profile)
+  // @Field(() => Profile)
   //profile: Profile;
 
   @Field()

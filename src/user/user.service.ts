@@ -9,13 +9,13 @@ import { UpdateUserInput } from './dto/update-user.input';
 export class UserService {
   constructor(private prisma: PrismaService) {}
   async create(data: CreateUserInput) {
-    const datum: Prisma.UserCreateInput = {
+    const datas: Prisma.UserCreateInput = {
       userName: data.userName,
       email: data.email,
       password: data.password,
       mobile: data.mobile,
     };
-    return await this.prisma.user.create({ data: datum });
+    return await this.prisma.user.create({ data: datas });
   }
 
   async findAll() {

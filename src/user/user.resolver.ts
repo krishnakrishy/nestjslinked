@@ -17,12 +17,11 @@ export class UserResolver {
     return await this.userService.create(data);
   }
 
-
   @Query(() => [User])
-   async findallUsers() {
-     return await this.userService.findAll();
-   }
+  async findallUsers() {
+    return await this.userService.findAll();
   }
+}
 
 //   @Query(() => User, { name: 'user' })
 //   findOne(@Args('id', { type: () => Int }) id: number) {
@@ -38,4 +37,4 @@ export class UserResolver {
 //   removeUser(@Args('id', { type: () => Int }) id: number) {
 //     return this.userService.remove(id);
 //   }
-// 
+//
