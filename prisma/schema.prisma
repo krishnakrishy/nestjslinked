@@ -10,71 +10,72 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model User {
   id        String   @id @default(cuid())
   userName  String   @unique
   email     String   @unique
   password  String
-  mobile    String   @unique
+  mobile    Int      @unique
+  profile   Profile?
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
 
-model profile {
-  id            String           @id @default(cuid())
-  fullName      String
-  qualification String
-  skills        String[]
-  experience    String
-  location      String
-  jobapplic     jobApplication[]
-  type          recruiter?       @relation(fields: [recruiterId], references: [id])
-  recruiterId   String?          @unique
-  
-  isActive      Boolean          @default(true)
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @default(now())
-  job           job[]
+model Profile {
+  id             String           @id @default(cuid())
+  fullName       String
+  qualification  String
+  skills         String[]
+  experience     String
+  location       String
+  jobApplication JobApplication[]
+  type           Recruiter?       @relation(fields: [recruiterId], references: [id])
+  recruiterId    String?          @unique
+  user           User?            @relation(fields: [userId], references: [id])
+  userId         String?          @unique
+  job            Job[]
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @default(now())
 }
 
-model recruiter {
+model Recruiter {
   id          String   @id @default(cuid())
   role        String
   companyName String
-  profile     profile?
+  profile     Profile?
 }
 
-model job {
-  id          String           @id @default(cuid())
-  title       String
-  companyName String
-  date        String
-  description String
-  opening     String
-  location    String
-  salary      String
-  lastDate    String
-  skill       String
-  experience  String
-  createdBy   profile?         @relation(fields: [profileId], references: [id])
-  profileId   String?
-  jobapplic   jobApplication[]
-  isActive    Boolean          @default(true)
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @default(now())
+model Job {
+  id             String           @id @default(cuid())
+  title          String
+  companyName    String
+  date           String
+  description    String
+  opening        String
+  location       String
+  salary         String
+  lastDate       String
+  skill          String
+  experience     String
+  createdBy      Profile?         @relation(fields: [profileId], references: [id])
+  profileId      String?
+  jobApplication JobApplication[]
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @default(now())
 }
 
-model jobApplication {
-  id         String   @id @default(cuid())
-  curproId   String?
-  appliedJob job?     @relation(fields: [jobId], references: [id])
-  jobId      String?
-  appliedBy  profile? @relation(fields: [profileId], references: [id])
-  profileId  String?
-  status     String?
-  isActive   Boolean  @default(true)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now())
+model JobApplication {
+  id                   String   @id @default(cuid())
+  currentuserProfileid String?
+  appliedJob           Job?     @relation(fields: [jobId], references: [id])
+  jobId                String?
+  appliedBy            Profile? @relation(fields: [profileId], references: [id])
+  profileId            String?
+  status               String?
+  isActive             Boolean  @default(true)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @default(now())
 }
-
