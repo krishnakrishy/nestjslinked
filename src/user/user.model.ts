@@ -1,5 +1,7 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
+import { Profile } from 'src/profile/profile.model';
+
 @ObjectType()
 export class User {
   @Field(() => ID)
@@ -14,8 +16,8 @@ export class User {
   @Field(() => Int)
   mobile: number;
 
-  // @Field(() => Profile)
-  //profile: Profile;
+  @Field(() => Profile)
+  profile: Profile;
 
   @Field()
   createdAt: Date;
