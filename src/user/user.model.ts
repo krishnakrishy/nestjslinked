@@ -11,8 +11,8 @@ export class User {
   @Field()
   email: string;
 
-  @Field(() => Int)
-  mobile: number;
+  @Field()
+  mobile: string;
 
   // @Field(() => Profile)
   //profile: Profile;
