@@ -3,11 +3,10 @@
 # ------------------------------------------------------
 
 type User {
-  id: String!
+  id: ID!
   userName: String!
   email: String!
-  mobile: Int!
-  profile: Profile!
+  mobile: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -17,52 +16,17 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type Profile {
-  id: String!
-  fullName: String!
-  qualification: String!
-  skills: [String!]!
-  experience: String!
-  location: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  user: User
-}
-
 type Query {
   findallUsers: [User!]!
-  profiles: [Profile!]!
-  profile(id: ID!): Profile!
 }
 
 type Mutation {
   createUser(data: CreateUserInput!): User!
-  createProfile(createProfileInput: CreateProfileInput!): Profile!
-  updateProfile(id: ID!, updateProfileInput: UpdateProfileInput!): Profile!
-  removeProfile(id: ID!): Profile!
 }
 
 input CreateUserInput {
   userName: String!
   email: String!
   password: String!
-  mobile: Int!
-}
-
-input CreateProfileInput {
-  fullName: String!
-  qualification: String!
-  skills: [String!]!
-  experience: String!
-  location: String!
-  userId: String!
-}
-
-input UpdateProfileInput {
-  fullName: String
-  qualification: String
-  skills: [String!]
-  experience: String
-  location: String
-  userId: String
+  mobile: String!
 }
