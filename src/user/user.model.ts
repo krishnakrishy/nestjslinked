@@ -4,7 +4,7 @@ import { Profile } from 'src/profile/profile.model';
 
 @ObjectType()
 export class User {
-  @Field(() => ID)
+  @Field()
   id: string;
 
   @Field()

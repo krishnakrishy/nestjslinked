@@ -3,7 +3,7 @@ import { User } from "src/user/user.model";
 
 @ObjectType()
 export class Profile {
-    @Field(() => ID)
+    @Field()
     id: string;
 
     @Field()
@@ -30,7 +30,7 @@ export class Profile {
     @Field()
     updatedAt: Date;
 
-    @Field(() => User, {nullable:true})
+    @Field(() => User, { nullable: true })
     user: User;
 
 }

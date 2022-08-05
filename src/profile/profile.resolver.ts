@@ -15,8 +15,8 @@ export class ProfileResolver {
   ) { }
 
   @Mutation(() => Profile)
-  createProfile(@Args('createProfileInput') createProfileInput: CreateProfileInput) {
-    return this.profileService.create(createProfileInput);
+  async createProfile(@Args('createProfileInput') createProfileInput: CreateProfileInput) {
+    return await this.profileService.create(createProfileInput);
   }
 
   @Query(() => [Profile])
