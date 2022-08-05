@@ -2,11 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type Job {
   id: ID!
-  userName: String!
-  email: String!
-  mobile: String!
+  title: String!
+  companyName: String!
+  description: String!
+  opening: String!
+  location: String!
+  salary: String!
+  lastDate: DateTime!
+  skill: String!
+  experience: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -16,12 +22,44 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type User {
+  id: String!
+  userName: String!
+  email: String!
+  mobile: String!
+  profile: Profile!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Profile {
+  id: String!
+  fullName: String!
+  qualification: String!
+  skills: [String!]!
+  experience: String!
+  location: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User
+}
+
 type Query {
   findallUsers: [User!]!
+  profiles: [Profile!]!
+  profile(id: ID!): Profile!
+  jobs: [Job!]!
+  job(id: ID!): Job!
 }
 
 type Mutation {
   createUser(data: CreateUserInput!): User!
+  createProfile(createProfileInput: CreateProfileInput!): Profile!
+  updateProfile(id: ID!, updateProfileInput: UpdateProfileInput!): Profile!
+  removeProfile(id: ID!): Profile!
+  createJob(data: CreateJobInput!): Job!
+  updateJob(id: ID!, data: UpdateJobInput!): Job!
+  removeJob(id: ID!): Job!
 }
 
 input CreateUserInput {
@@ -29,4 +67,48 @@ input CreateUserInput {
   email: String!
   password: String!
   mobile: String!
+}
+
+input CreateProfileInput {
+  fullName: String!
+  qualification: String!
+  skills: [String!]!
+  experience: String!
+  location: String!
+  userId: String!
+}
+
+input UpdateProfileInput {
+  fullName: String
+  qualification: String
+  skills: [String!]
+  experience: String
+  location: String
+  userId: String
+}
+
+input CreateJobInput {
+  title: String!
+  companyName: String!
+  description: String!
+  opening: String!
+  location: String!
+  salary: String!
+  lastDate: DateTime!
+  skill: String!
+  experience: String!
+  profileId: String!
+}
+
+input UpdateJobInput {
+  title: String
+  companyName: String
+  description: String
+  opening: String
+  location: String
+  salary: String
+  lastDate: DateTime
+  skill: String
+  experience: String
+  profileId: String
 }

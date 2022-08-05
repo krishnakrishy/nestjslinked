@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { JobApplicationModule } from './job-application/job-application.module';
+import { JobModule } from './job/job.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ProfileModule } from './profile/profile.module';
 import { RecruiterModule } from './recruiter/recruiter.module';
@@ -18,10 +19,11 @@ import { UserModule } from './user/user.module';
       introspection: process.env.ENABLE_INTROSPECTION === 'true' ? true : false,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
-    UserModule,
     PrismaModule,
+    UserModule,
     ProfileModule,
     RecruiterModule,
+    JobModule,
     JobApplicationModule,
   ],
   controllers: [AppController],
