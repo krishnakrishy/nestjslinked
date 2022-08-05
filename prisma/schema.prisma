@@ -30,7 +30,7 @@ model Profile {
   experience     String
   location       String
   jobApplication JobApplication[]
-  type           Recruiter?       @relation(fields: [recruiterId], references: [id])
+  recruiter      Recruiter?       @relation(fields: [recruiterId], references: [id])
   recruiterId    String?          @unique
   user           User?            @relation(fields: [userId], references: [id])
   userId         String?          @unique
