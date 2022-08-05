@@ -11,8 +11,8 @@ export class Job {
   @Field()
   companyName: string;
 
-  @Field()
-  date: Date;
+  // @Field()
+  // date: Date;
 
   @Field()
   description: string;
@@ -36,7 +36,7 @@ export class Job {
   experience: string;
 
   // @Field(() => profile)
-  // createdBy: Profile;
+  // profile: Profile;
 
   // @Field()
   // profileId: string;

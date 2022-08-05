@@ -4,16 +4,10 @@
 
 type Job {
   id: ID!
-  title: String!
-  companyName: String!
-  date: DateTime!
-  description: String!
-  opening: String!
-  location: String!
-  salary: String!
-  lastDate: DateTime!
-  skill: String!
-  experience: String!
+  userName: String!
+  email: String!
+  password: String!
+  mobile: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }

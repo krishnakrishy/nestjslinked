@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { IsDate, IsNotEmpty } from 'class-validator';
 
 @InputType()
 export class CreateJobInput {
@@ -11,9 +11,9 @@ export class CreateJobInput {
   @IsNotEmpty()
   companyName: string;
 
-  @Field()
-  @IsNotEmpty()
-  date: Date;
+  // @Field()
+  // @IsNotEmpty()
+  // date: Date;
 
   @Field()
   @IsNotEmpty()
@@ -33,6 +33,7 @@ export class CreateJobInput {
 
   @Field()
   @IsNotEmpty()
+  @IsDate()
   lastDate: Date;
 
   @Field()
@@ -43,7 +44,7 @@ export class CreateJobInput {
   @IsNotEmpty()
   experience: string;
 
-  // @Field()
-  // @IsNotEmpty()
-  // createdBy: string;
+  @Field()
+  @IsNotEmpty()
+  profileId: string;
 }

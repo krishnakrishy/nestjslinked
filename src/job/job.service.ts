@@ -11,7 +11,7 @@ export class JobService {
     const data: Prisma.JobCreateInput = {
       title: createJobInput.title,
       companyName: createJobInput.companyName,
-      date: createJobInput.date,
+      // date: createJobInput.date,
       description: createJobInput.description,
       opening: createJobInput.opening,
       location: createJobInput.location,
@@ -39,7 +39,7 @@ export class JobService {
     const data: Prisma.JobUpdateInput = {
       title: updateJobInput.title,
       companyName: updateJobInput.companyName,
-      date: updateJobInput.date,
+      // date: updateJobInput.date,
       description: updateJobInput.description,
       opening: updateJobInput.opening,
       location: updateJobInput.location,
