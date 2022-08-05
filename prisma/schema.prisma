@@ -51,15 +51,14 @@ model Job {
   id             String           @id @default(cuid())
   title          String
   companyName    String
-  date           String
   description    String
   opening        String
   location       String
   salary         String
-  lastDate       String
+  lastDate       DateTime         @default(now())
   skill          String
   experience     String
-  createdBy      Profile?         @relation(fields: [profileId], references: [id])
+  profile        Profile?         @relation(fields: [profileId], references: [id])
   profileId      String?
   jobApplication JobApplication[]
   isActive       Boolean          @default(true)
