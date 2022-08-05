@@ -4,6 +4,7 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './user.model';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -14,7 +15,14 @@ export class UserResolver {
 
   @Mutation(() => User)
   async createUser(@Args('data') data: CreateUserInput) {
-    return await this.userService.create(data);
+    try {
+      return await this.userService.create(data);
+    } catch (error) {
+      if (error.code === 'P2002') {
+        throw new BadRequestException('invalid creditionals');
+      }
+      throw new BadRequestException('something went wrong');
+    }
   }
 
   @Query(() => [User])

@@ -6,7 +6,6 @@ type User {
   id: ID!
   userName: String!
   email: String!
-  password: String!
   mobile: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
