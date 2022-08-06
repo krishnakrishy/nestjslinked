@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateJobApplicationInput } from './dto/create-job-application.input';
-// import { UpdateJobApplicationInput } from './dto/update-job-application.input';
+import { UpdateJobApplicationInput } from './dto/update-job-application.input';
 
 @Injectable()
 export class JobApplicationService {
