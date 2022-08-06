@@ -42,8 +42,8 @@ export class JobResolver {
   }
 
   @Query(() => Job, { name: 'job' })
-  findOne(@Args('id', { type: () => ID }) id: string) {
-    return this.jobService.findOne(id);
+  findJobOne(@Args('id', { type: () => ID }) id: string) {
+    return this.jobService.findJobOne(id);
   }
 
   @Mutation(() => Job)
@@ -62,7 +62,7 @@ export class JobResolver {
     //     error: 'Recruiter can only update jobs',
     //   });
     // }
-    await this.jobService.findOne(id);
+    await this.jobService.findJobOne(id);
     return this.jobService.update(id, updateJobInput);
   }
 
@@ -79,7 +79,7 @@ export class JobResolver {
     //     error: 'Recruiter can only delete jobs',
     //   });
     // }
-    await this.jobService.findOne(id);
+    await this.jobService.findJobOne(id);
     return this.jobService.remove(id);
   }
   // @ResolveField(() => Profile)
