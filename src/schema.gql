@@ -43,14 +43,33 @@ type Job {
   profile: Profile
   createdAt: DateTime!
   updatedAt: DateTime!
+  jobApplication: [JobApplication!]!
+}
+
+type JobApplication {
+  id: String!
+  appliedJob: Job!
+  appliedBy: Profile!
+  status: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Recruiter {
+  id: ID!
+  role: String!
+  companyName: String!
 }
 
 type Query {
   findallUsers: [User!]!
   profiles: [Profile!]!
   profile(id: ID!): Profile!
+  findAll: [Recruiter!]!
+  recruiter(id: ID!): Recruiter!
   jobs: [Job!]!
   job(id: ID!): Job!
+  jobApplication: [JobApplication!]!
 }
 
 type Mutation {
@@ -58,9 +77,13 @@ type Mutation {
   createProfile(createProfileInput: CreateProfileInput!): Profile!
   updateProfile(id: ID!, updateProfileInput: UpdateProfileInput!): Profile!
   removeProfile(id: ID!): Profile!
+  createRecruiter(data: CreateRecruiterInput!): Recruiter!
+  updateRecruiter(id: ID!, data: UpdateRecruiterInput!): Recruiter!
+  removeRecruiter(id: ID!): Recruiter!
   createJob(data: CreateJobInput!): Job!
   updateJob(id: ID!, data: UpdateJobInput!): Job!
   removeJob(id: ID!): Job!
+  createJobApplication(data: CreateJobApplicationInput!): JobApplication!
 }
 
 input CreateUserInput {
@@ -88,6 +111,16 @@ input UpdateProfileInput {
   userId: String
 }
 
+input CreateRecruiterInput {
+  role: String!
+  companyName: String!
+}
+
+input UpdateRecruiterInput {
+  role: String
+  companyName: String
+}
+
 input CreateJobInput {
   title: String!
   companyName: String!
@@ -112,4 +145,10 @@ input UpdateJobInput {
   skill: String
   experience: String
   profileId: String
+}
+
+input CreateJobApplicationInput {
+  jobId: String!
+  profileId: String!
+  status: String
 }

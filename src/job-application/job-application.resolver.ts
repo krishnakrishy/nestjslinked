@@ -1,15 +1,6 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  Int,
-  ID,
-  ResolveField,
-} from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { JobApplicationService } from './job-application.service';
 import { CreateJobApplicationInput } from './dto/create-job-application.input';
-import { UpdateJobApplicationInput } from './dto/update-job-application.input';
 import { JobApplication } from './job-application.model';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { NotFoundException } from '@nestjs/common';
@@ -50,39 +41,10 @@ export class JobApplicationResolver {
   }
 }
 
-//   @Query(() => JobApplication, { name: 'jobApplication' })
-//   async findOne(@Args('id', { type: () => ID }) id: string) {
-//     return await this.jobApplicationService.findOne(id);
-//   }
-
-//   @Mutation(() => JobApplication)
-//   async updateJobApplication(
-//     @Args('id', { type: () => ID }) id: string,
-//     @Args('data') updateJobApplicationInput: UpdateJobApplicationInput,
-//   ) {
-//     const checkJob = await this.prisma.jobApplication.findUnique({
-//       where: {
-//         id: updateJobApplicationInput.jobId,
-//       },
-//     });
-//     if (!checkJob) {
-//       return new NotFoundException('job not found');
-//     }
-//     const checkprofile = await this.prisma.profile.findUnique({
-//       where: {
-//         id: updateJobApplicationInput.profileId,
-//       },
-//     });
-//     if(!checkprofile){
-//       return new NotFoundException('profile not found');
-//     }
-//     return this.jobApplicationService.update(id, updateJobApplicationInput);
-//   }
-
-//   @Mutation(() => JobApplication)
-//   removeJobApplication(@Args('id', { type: () => Int }) id: string) {
-//     return this.jobApplicationService.remove(id);
-//   }
+// @Query(() => JobApplication, { name: 'jobApplication' })
+// async findone(@Args('id', { type: () => ID }) id: string) {
+//   return await this.jobApplicationService.findOne(id);
+// }
 
 //   //  @ResolveField(() => Job)
 //   // async job(@parent() joba: JobApplication){

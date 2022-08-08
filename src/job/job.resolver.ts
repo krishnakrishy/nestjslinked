@@ -16,6 +16,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 import { Profile } from 'src/profile/profile.model';
 import { BadRequestException } from '@nestjs/common';
+import { JobApplication } from 'src/job-application/job-application.model';
 
 @Resolver(() => Job)
 export class JobResolver {
@@ -91,10 +92,10 @@ export class JobResolver {
       .profile();
   }
 
-  // @ResolveField(() => [JobApplication])
-  // async jobApplication(@Parent() job: Job) {
-  //   return await this.prisma.job
-  //     .findUnique({ where: { id: job.id } })
-  //     .jobApplication();
-  // }
+  @ResolveField(() => [JobApplication])
+  async jobApplication(@Parent() job: Job) {
+    return await this.prisma.job
+      .findUnique({ where: { id: job.id } })
+      .jobApplication();
+  }
 }
