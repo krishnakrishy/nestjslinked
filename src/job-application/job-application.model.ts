@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Job } from 'src/job/job.model';
 import { Profile } from 'src/profile/profile.model';
 
 @ObjectType()
