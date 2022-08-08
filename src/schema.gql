@@ -69,7 +69,7 @@ type Query {
   recruiter(id: ID!): Recruiter!
   jobs: [Job!]!
   job(id: ID!): Job!
-  jobApplication: [JobApplication!]!
+  jobApplication(id: ID!): JobApplication!
 }
 
 type Mutation {

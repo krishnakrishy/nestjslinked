@@ -1,9 +1,19 @@
-import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  ID,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { JobApplicationService } from './job-application.service';
 import { CreateJobApplicationInput } from './dto/create-job-application.input';
 import { JobApplication } from './job-application.model';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { NotFoundException } from '@nestjs/common';
+import { Job } from 'src/job/job.model';
+import { Profile } from 'src/profile/profile.model';
 
 @Resolver(() => JobApplication)
 export class JobApplicationResolver {
@@ -39,15 +49,23 @@ export class JobApplicationResolver {
   async findAll() {
     return await this.jobApplicationService.findAll();
   }
+
+  @Query(() => JobApplication, { name: 'jobApplication' })
+  async findone(@Args('id', { type: () => ID }) id: string) {
+    return await this.jobApplicationService.findone(id);
+  }
+
+  @ResolveField(() => Job)
+  async appliedJob(@Parent() jobApp: JobApplication) {
+    return await this.prisma.jobApplication
+      .findUnique({ where: { id: jobApp.id } })
+      .appliedJob();
+  }
+
+  @ResolveField(() => Profile)
+  async appliedBy(@Parent() jobApp: JobApplication) {
+    return await this.prisma.jobApplication
+      .findUnique({ where: { id: jobApp.id } })
+      .appliedBy();
+  }
 }
-
-// @Query(() => JobApplication, { name: 'jobApplication' })
-// async findone(@Args('id', { type: () => ID }) id: string) {
-//   return await this.jobApplicationService.findOne(id);
-// }
-
-//   //  @ResolveField(() => Job)
-//   // async job(@parent() joba: JobApplication){
-//   //   return this.prisma.jobApplication.findUnique({where: { id: job.id}}).appliedJob();
-//   // }
-// }

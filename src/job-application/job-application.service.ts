@@ -17,13 +17,14 @@ export class JobApplicationService {
   async findAll() {
     return await this.prisma.jobApplication.findMany();
   }
+
+  async findone(id: string) {
+    this.prisma.jobApplication.findFirst;
+    const jobApplication = await this.prisma.jobApplication.findUnique({
+      where: { id },
+    });
+    if (!jobApplication) {
+      return new NotFoundException('jobapplication not found');
+    }
+  }
 }
-// async findone(id: string) {
-//   this.prisma.jobApplication.findFirst;
-//   const jobApplication = await this.prisma.jobApplication.findUnique({
-//     where: { id },
-//   });
-//   if (!jobApplication) {
-//     return new NotFoundException('jobapplication not found');
-//   }
-// }
