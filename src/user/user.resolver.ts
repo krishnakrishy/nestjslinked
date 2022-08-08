@@ -1,10 +1,9 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { CreateUserInput } from './dto/create-user.input';
-import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './user.model';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -31,18 +30,17 @@ export class UserResolver {
   }
 }
 
-  // @Query(() => User, { name: 'user' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.userService.findOne(id);
-  // }
+// @Query(() => User, { name: 'user' })
+// findOne(@Args('id', { type: () => Int }) id: number) {
+//   return this.userService.findOne(id);
+// }
 
-  // @Mutation(() => User)
-  // updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-  //   return this.userService.update(updateUserInput, updateUserInput);
-  // }
+// @Mutation(() => User)
+// updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+//   return this.userService.update(updateUserInput, updateUserInput);
+// }
 
-  // @Mutation(() => User)
-  // removeUser(@Args('id', { type: () => Int }) id: number) {
-  //   return this.userService.remove(id);
-  // }
-
+// @Mutation(() => User)
+// removeUser(@Args('id', { type: () => Int }) id: number) {
+//   return this.userService.remove(id);
+// }
