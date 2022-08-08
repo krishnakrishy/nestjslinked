@@ -27,21 +27,20 @@ export class JobApplicationService {
     if (!jobApplication) {
       return new NotFoundException('jobapplication not found');
     }
+  }
 
-    //   async update(
-    //     id: string,
-    //     updateJobApplicationInput: UpdateJobApplicationInput,
-    //   ) {
-    //     const data: Prisma.JobApplicationUpdateInput = {
-    //       appliedJob: { connect: { id: updateJobApplicationInput.jobId } },
-    //       appliedBy: { connect: { id: updateJobApplicationInput.profileId } },
-    //     };
-    //     return await this.prisma.jobApplication.update({ where: { id }, data });
-    //   }
+  async update(
+    id: string,
+    updateJobApplicationInput: UpdateJobApplicationInput,
+  ) {
+    const data: Prisma.JobApplicationUpdateInput = {
+      appliedJob: { connect: { id: updateJobApplicationInput.jobId } },
+      appliedBy: { connect: { id: updateJobApplicationInput.profileId } },
+    };
+    return await this.prisma.jobApplication.update({ where: { id }, data });
+  }
 
-    //   async remove(id: string) {
-    //     return await this.prisma.jobApplication.delete({ where: { id } });
-    //   }
-    // }
+  async remove(id: string) {
+    return await this.prisma.jobApplication.delete({ where: { id } });
   }
 }

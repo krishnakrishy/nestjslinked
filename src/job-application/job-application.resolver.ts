@@ -47,44 +47,44 @@ export class JobApplicationResolver {
     return await this.jobApplicationService.create(createJobApplicationInput);
   }
 
-  @Query(() => [JobApplication], { name: 'jobApplication' })
+  @Query(() => [JobApplication], { name: 'jobApplications' })
   async findAll() {
     return await this.jobApplicationService.findAll();
   }
 
-  //   @Query(() => JobApplication, { name: 'jobApplication' })
-  //   async findOne(@Args('id', { type: () => ID }) id: string) {
-  //     return await this.jobApplicationService.findOne(id);
-  //   }
+  @Query(() => JobApplication, { name: 'jobApplication' })
+  async findOne(@Args('id', { type: () => ID }) id: string) {
+    return await this.jobApplicationService.findOne(id);
+  }
 
-  //   @Mutation(() => JobApplication)
-  //   async updateJobApplication(
-  //     @Args('id', { type: () => ID }) id: string,
-  //     @Args('data') updateJobApplicationInput: UpdateJobApplicationInput,
-  //   ) {
-  //     const checkJob = await this.prisma.jobApplication.findUnique({
-  //       where: {
-  //         id: updateJobApplicationInput.jobId,
-  //       },
-  //     });
-  //     if (!checkJob) {
-  //       return new NotFoundException('job not found');
-  //     }
-  //     const checkprofile = await this.prisma.profile.findUnique({
-  //       where: {
-  //         id: updateJobApplicationInput.profileId,
-  //       },
-  //     });
-  //     if(!checkprofile){
-  //       return new NotFoundException('profile not found');
-  //     }
-  //     return this.jobApplicationService.update(id, updateJobApplicationInput);
-  //   }
+  @Mutation(() => JobApplication)
+  async updateJobApplication(
+    @Args('id', { type: () => ID }) id: string,
+    @Args('data') updateJobApplicationInput: UpdateJobApplicationInput,
+  ) {
+    const checkJob = await this.prisma.jobApplication.findUnique({
+      where: {
+        id: updateJobApplicationInput.jobId,
+      },
+    });
+    if (!checkJob) {
+      return new NotFoundException('job not found');
+    }
+    const checkprofile = await this.prisma.profile.findUnique({
+      where: {
+        id: updateJobApplicationInput.profileId,
+      },
+    });
+    if (!checkprofile) {
+      return await new NotFoundException('profile not found');
+    }
+    return this.jobApplicationService.update(id, updateJobApplicationInput);
+  }
 
-  //   @Mutation(() => JobApplication)
-  //   removeJobApplication(@Args('id', { type: () => Int }) id: string) {
-  //     return this.jobApplicationService.remove(id);
-  //   }
+  @Mutation(() => JobApplication)
+  removeJobApplication(@Args('id', { type: () => ID }) id: string) {
+    return this.jobApplicationService.remove(id);
+  }
 
   @ResolveField(() => Job)
   async appliedJob(@Parent() jobApp: JobApplication) {
