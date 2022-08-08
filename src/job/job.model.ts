@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Profile } from 'src/profile/profile.model';
 
 @ObjectType()
 export class Job {
@@ -10,9 +11,6 @@ export class Job {
 
   @Field()
   companyName: string;
-
-  // @Field()
-  // date: Date;
 
   @Field()
   description: string;
@@ -35,11 +33,8 @@ export class Job {
   @Field()
   experience: string;
 
-  // @Field(() => profile)
-  // profile: Profile;
-
-  // @Field()
-  // profileId: string;
+  @Field(() => Profile, { nullable: true })
+  profile: Profile;
 
   // @Field(() => [jobApplication], { nullable: true })
   // jobapplication: jobApplication[];

@@ -6,8 +6,7 @@ import { UpdateProfileInput } from './dto/update-profile.input';
 
 @Injectable()
 export class ProfileService {
-  constructor(private readonly prisma: PrismaService,
-  ) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   create(createProfileInput: CreateProfileInput) {
     const data: Prisma.ProfileCreateInput = {
@@ -16,7 +15,7 @@ export class ProfileService {
       skills: createProfileInput.skills,
       experience: createProfileInput.experience,
       location: createProfileInput.location,
-      user: { connect: { id: createProfileInput.userId } }
+      user: { connect: { id: createProfileInput.userId } },
     };
 
     return this.prisma.profile.create({ data });
@@ -28,8 +27,8 @@ export class ProfileService {
 
   async findOne(id: string) {
     const profile = await this.prisma.profile.findUnique({ where: { id } });
-    if ((!profile)) {
-      throw new NotFoundException("profile not found");
+    if (!profile) {
+      throw new NotFoundException('profile not found');
     }
     return profile;
   }
@@ -40,8 +39,7 @@ export class ProfileService {
       qualification: updateProfileInput.qualification,
       skills: updateProfileInput.skills,
       experience: updateProfileInput.experience,
-      location: updateProfileInput.location
-
+      location: updateProfileInput.location,
     };
     return await this.prisma.profile.update({ where: { id }, data });
   }
@@ -49,5 +47,4 @@ export class ProfileService {
   async remove(id: string) {
     return await this.prisma.profile.delete({ where: { id } });
   }
-
 }

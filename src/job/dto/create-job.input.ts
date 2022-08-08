@@ -11,10 +11,6 @@ export class CreateJobInput {
   @IsNotEmpty()
   companyName: string;
 
-  // @Field()
-  // @IsNotEmpty()
-  // date: Date;
-
   @Field()
   @IsNotEmpty()
   description: string;

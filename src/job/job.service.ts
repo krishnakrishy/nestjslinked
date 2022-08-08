@@ -11,7 +11,6 @@ export class JobService {
     const data: Prisma.JobCreateInput = {
       title: createJobInput.title,
       companyName: createJobInput.companyName,
-      // date: createJobInput.date,
       description: createJobInput.description,
       opening: createJobInput.opening,
       location: createJobInput.location,
@@ -19,6 +18,7 @@ export class JobService {
       lastDate: createJobInput.lastDate,
       skill: createJobInput.skill,
       experience: createJobInput.experience,
+      profile: { connect: { id: createJobInput.profileId } },
     };
     return await this.prisma.job.create({ data });
   }
@@ -27,7 +27,7 @@ export class JobService {
     return await this.prisma.job.findMany();
   }
 
-  async findOne(id: string) {
+  async findJobOne(id: string) {
     const job = await this.prisma.job.findUnique({ where: { id } });
     if (!job) {
       throw new NotFoundException('job not found');
@@ -39,7 +39,6 @@ export class JobService {
     const data: Prisma.JobUpdateInput = {
       title: updateJobInput.title,
       companyName: updateJobInput.companyName,
-      // date: updateJobInput.date,
       description: updateJobInput.description,
       opening: updateJobInput.opening,
       location: updateJobInput.location,
@@ -52,7 +51,7 @@ export class JobService {
   }
 
   async remove(id: string) {
-    await this.findOne(id);
+    await this.findJobOne(id);
     return await this.prisma.job.delete({ where: { id } });
   }
 }
