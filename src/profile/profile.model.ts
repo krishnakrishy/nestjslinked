@@ -1,36 +1,36 @@
-import { Field, ID, ObjectType } from "@nestjs/graphql";
-import { User } from "src/user/user.model";
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Recruiter } from 'src/recruiter/recruiter.model';
+import { User } from 'src/user/user.model';
 
 @ObjectType()
 export class Profile {
-    @Field()
-    id: string;
+  @Field()
+  id: string;
 
-    @Field()
-    fullName: string;
+  @Field()
+  fullName: string;
 
-    @Field()
-    qualification: string;
+  @Field()
+  qualification: string;
 
-    @Field(() => [String])
-    skills: string[];
+  @Field(() => [String])
+  skills: string[];
 
-    @Field()
-    experience: string;
+  @Field()
+  experience: string;
 
-    @Field()
-    location: string;
+  @Field()
+  location: string;
 
-    // @Field()
-    // recruiter: Recruiter;
+  @Field(() => Recruiter, { nullable: true })
+  recruiter: Recruiter;
 
-    @Field()
-    createdAt: Date;
+  @Field()
+  createdAt: Date;
 
-    @Field()
-    updatedAt: Date;
+  @Field()
+  updatedAt: Date;
 
-    @Field(() => User, { nullable: true })
-    user: User;
-
+  @Field(() => User, { nullable: true })
+  user: User;
 }

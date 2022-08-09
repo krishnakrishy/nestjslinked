@@ -77,3 +77,6 @@ model JobApplication {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
 }
+
+//default - applied, updated - 
+// applied, selected, rejected

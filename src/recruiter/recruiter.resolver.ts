@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args, Int, ID, Query } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, ID, Query } from '@nestjs/graphql';
 import { RecruiterService } from './recruiter.service';
 import { CreateRecruiterInput } from './dto/create-recruiter.input';
 import { UpdateRecruiterInput } from './dto/update-recruiter.input';
@@ -19,7 +19,7 @@ export class RecruiterResolver {
     return await this.recruiterService.create(createRecruiterInput);
   }
 
-  @Query(() => [Recruiter])
+  @Query(() => [Recruiter], { name: 'recruiters' })
   async findAll() {
     return await this.recruiterService.findAll();
   }

@@ -54,23 +54,28 @@ export class JobResolver {
     @Args('id', { type: () => ID }) id: string,
     @Args('data') updateJobInput: UpdateJobInput,
   ) {
+    console.log('........');
+
+    await this.jobService.findJobOne(id);
     const check = await this.prisma.profile.findUnique({
       where: {
         id: updateJobInput.profileId,
       },
       select: { recruiter: true },
     });
+    console.log('////', check);
     if (!check) {
-      return new BadRequestException({
-        error: 'Recruiter can only update jobs',
-      });
+      return new BadRequestException('Recruiter can only update jobs ');
     }
-    await this.jobService.findJobOne(id);
     return this.jobService.update(id, updateJobInput);
   }
 
   @Mutation(() => Job)
-  async removeJob(@Args('id', { type: () => ID }) id: string) {
+  async removeJob(
+    @Args('id', { type: () => ID }) id: string,
+    @Args('profileid') profileId: string,
+  ) {
+    await this.jobService.findJobOne(id);
     const check = await this.prisma.profile.findUnique({
       where: {
         id,
@@ -82,8 +87,7 @@ export class JobResolver {
         error: 'Recruiter can only delete jobs',
       });
     }
-    await this.jobService.findJobOne(id);
-    return this.jobService.remove(id);
+    return this.jobService.remove(id, profileId);
   }
   @ResolveField(() => Profile)
   async profile(@Parent() job: Job) {

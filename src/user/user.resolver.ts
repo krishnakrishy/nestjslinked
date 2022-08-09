@@ -15,12 +15,33 @@ export class UserResolver {
   @Mutation(() => User)
   async createUser(@Args('data') data: CreateUserInput) {
     try {
+      const checkName = this.prisma.user.findUnique({
+        where: {
+          userName: data.userName,
+        },
+      });
+      if (checkName) {
+        throw new BadRequestException('UserName already exists');
+      }
+      const checkEmail = this.prisma.user.findUnique({
+        where: {
+          email: data.email,
+        },
+      });
+      if (checkEmail) {
+        throw new BadRequestException('email already exists');
+      }
+      const checkMobile = this.prisma.user.findUnique({
+        where: {
+          mobile: data.mobile,
+        },
+      });
+      if (checkMobile) {
+        throw new BadRequestException('mobile already exists');
+      }
       return await this.userService.create(data);
     } catch (error) {
-      if (error.code === 'P2002') {
-        throw new BadRequestException('invalid creditionals');
-      }
-      throw new BadRequestException('something went wrong');
+      throw new BadRequestException(error);
     }
   }
 
@@ -29,18 +50,3 @@ export class UserResolver {
     return await this.userService.findAll();
   }
 }
-
-// @Query(() => User, { name: 'user' })
-// findOne(@Args('id', { type: () => Int }) id: number) {
-//   return this.userService.findOne(id);
-// }
-
-// @Mutation(() => User)
-// updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-//   return this.userService.update(updateUserInput, updateUserInput);
-// }
-
-// @Mutation(() => User)
-// removeUser(@Args('id', { type: () => Int }) id: number) {
-//   return this.userService.remove(id);
-// }

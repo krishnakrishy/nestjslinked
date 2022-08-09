@@ -50,7 +50,7 @@ export class JobService {
     return await this.prisma.job.update({ where: { id }, data });
   }
 
-  async remove(id: string) {
+  async remove(id: string, profileId: string) {
     await this.findJobOne(id);
     return await this.prisma.job.delete({ where: { id } });
   }

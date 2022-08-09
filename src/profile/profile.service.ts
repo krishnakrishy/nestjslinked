@@ -35,6 +35,7 @@ export class ProfileService {
 
   async update(id: string, updateProfileInput: UpdateProfileInput) {
     const data: Prisma.ProfileUpdateInput = {
+      recruiter: { connect: { id: updateProfileInput.recruiterId } },
       fullName: updateProfileInput.fullName,
       qualification: updateProfileInput.qualification,
       skills: updateProfileInput.skills,

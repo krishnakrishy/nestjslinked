@@ -1,5 +1,6 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
+import { isEmpty, IsNotEmpty, IsOptional } from 'class-validator';
+import { isNullableType } from 'graphql';
 
 @InputType()
 export class CreateProfileInput {
@@ -24,13 +25,12 @@ export class CreateProfileInput {
   @IsNotEmpty()
   location: string;
 
-  // @Field()
-  // recruiterId: string;
+  @Field({ nullable: true })
+  @IsNotEmpty()
+  @IsOptional()
+  recruiterId: string;
 
   @Field()
   @IsNotEmpty()
   userId: string;
-
-  // @Field()
-  // recruiterId: string;
 }

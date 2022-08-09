@@ -14,6 +14,8 @@ import { Profile } from './profile.model';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from 'src/user/user.model';
 import { UserService } from 'src/user/user.service';
+import { JobApplication } from 'src/job-application/job-application.model';
+import { Recruiter } from 'src/recruiter/recruiter.model';
 
 @Resolver(() => Profile)
 export class ProfileResolver {
@@ -54,15 +56,19 @@ export class ProfileResolver {
     await this.profileService.findOne(id);
     return this.profileService.remove(id);
   }
-  // @ResolveField(()=> Recruiter)
-  // async recruiter(@parent() profile:Profile){
-  //   return await this.prisma.profile.findUnique({where :{id:profile.id}}).recruiter();
-  // }
+  @ResolveField(() => Recruiter)
+  async recruiter(@Parent() profile: Profile) {
+    return await this.prisma.profile
+      .findUnique({ where: { id: profile.id } })
+      .recruiter();
+  }
 
-  // @ResolveField(()=>[JobApplication])
-  // async jobapply(@parent()profile:Profile){
-  //   return await this.prisma.profile.findUnique({where:{id:profile.id}}).jobapply();
-  // }
+  @ResolveField(() => [JobApplication])
+  async JobApplication(@Parent() profile: Profile) {
+    return await this.prisma.profile
+      .findUnique({ where: { id: profile.id } })
+      .jobApplication();
+  }
 
   @ResolveField(() => User)
   async user(@Parent() profile: Profile) {

@@ -13,7 +13,7 @@ export class JobApplication {
   @Field(() => Profile)
   appliedBy: Profile;
 
-  @Field()
+  @Field({ nullable: true })
   status: string;
 
   @Field()

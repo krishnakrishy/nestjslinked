@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 @InputType()
 export class CreateJobApplicationInput {
@@ -14,4 +14,9 @@ export class CreateJobApplicationInput {
   @Field({ nullable: true })
   @IsNotEmpty()
   status: string;
+
+  @Field({ nullable: true })
+  @IsNotEmpty()
+  @IsOptional()
+  recruiterId: string;
 }
